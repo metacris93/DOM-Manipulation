@@ -2,6 +2,8 @@
  * This file is just a silly example to show everything working in the browser.
  * When you're ready to start on your site, clear the file. Happy hacking!
  **/
+
+//const url = "https://platzi-avo.vercel.app/api/avo";
 const baseUrl = "https://platzi-avo.vercel.app";
 const app = document.querySelector("#app");
 
@@ -20,43 +22,37 @@ const formatPrice = (price) =>
     // 💡 More about Array.map: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
     const nodeArray = allAvos.map((avocado) => {
       // Create image node
-      //<img class="w-48 h-48 rounded-full mx-auto -mb-24" src="https://platzi-avo.vercel.app/images/fuerte.jpg" alt="Avatar Jacky"/>
+      // <img class="h-16 w-16 md:h-24 md:w-24 rounded-full mx-auto md:mx-0 md:mr-6" src="avatar.jpg">
       const image = document.createElement("img");
-      image.className = "w-48 h-48 rounded-full mx-auto -mb-24";
+      image.className =
+        "h-16 w-16 md:h-24 md:w-24 rounded-full mx-auto md:mx-0 md:mr-6";
       image.src = `${baseUrl}${avocado.image}`;
   
       // Create heading
-      // <h2 class="font-title text-gray-800 text-xl mb-3">
+      // <h2 class="text-lg">Erin Lindford</h2>
       const title = document.createElement("h2");
-      title.className = "font-title text-gray-800 text-xl mb-3";
-      title.textContent = avocado.name;//.substring(0,10);
+      title.className = "text-lg";
+      title.textContent = avocado.name;
   
-      //desription
-      //<p class="font-body">
-      const description = document.createElement("p");
-      description.className = "font-body";
-      description.textContent = avocado.attributes.taste.substring(0,10);
-
       // Create Price
       // <div class="text-gray-600">(555) 765-4321</div>
-      const price = document.createElement("p");
-      price.className = "text-indigo-500 text-xl font-medium mt-2";
+      const price = document.createElement("div");
+      price.className = "text-gray-600";
       price.textContent = formatPrice(avocado.price);
-
-      // Wrap price & title
-      // <div class="bg-white shadow-lg rounded-lg px-8 pt-32 pb-10 text-gray-400">
-      const content = document.createElement("div");
-      content.className = "bg-white shadow-lg rounded-lg px-8 pt-32 pb-10 text-gray-400";
-      content.appendChild(title);
-      content.appendChild(description);
-      content.appendChild(price);
   
-      // Wrap Img and content
+      // Wrap price & title
+      // <div class="text-center md:text-left"><price ><title ></div>
+      const priceAndTitle = document.createElement("div");
+      priceAndTitle.className = "text-center md:text-left";
+      priceAndTitle.appendChild(title);
+      priceAndTitle.appendChild(price);
+  
+      // Wrap Img and priceAndTitle
       // <div class="md:flex bg-white rounded-lg p-6">
       const card = document.createElement("div");
-      card.className = "text-center m-10 w-1/4";
+      card.className = "md:flex bg-white rounded-lg p-6 hover:bg-gray-300";
       card.appendChild(image);
-      card.appendChild(content);
+      card.appendChild(priceAndTitle);
   
       return card;
     });
